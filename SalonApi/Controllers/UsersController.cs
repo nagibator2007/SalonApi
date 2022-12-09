@@ -27,11 +27,11 @@ namespace SalonApi.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
-        [HttpGet("{UserLogin/UserPassword}")]
-        public async Task<ActionResult<Users>> GetUser(string id)
+        // GET: api/Users/dima18/Dima18
+        [HttpGet("{UserLogin}/{UserPassword}")]
+        public async Task<ActionResult<Users>> GetUser(string UserLogin, string UserPassword)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _context.Users.FirstOrDefaultAsync(x=>x.UserLogin==UserLogin&&x.UserPassword==UserPassword);
 
             if (users == null)
             {
@@ -41,7 +41,7 @@ namespace SalonApi.Controllers
             return users;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
